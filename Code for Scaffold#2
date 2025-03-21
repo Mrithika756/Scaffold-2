@@ -1,0 +1,31 @@
+from machine import Pin, PWM
+import time
+
+
+servo = PWM(Pin(13), freq=50)  
+led = Pin(2, Pin.OUT)         
+sensor = Pin(12, Pin.IN)       
+
+
+def set_servo_angle(angle):
+    duty = int((angle / 180) * 102 + 26) 
+    servo.duty(duty)
+    
+
+def servo_vibrate():
+    for _ in range(5):
+        set_servo_angle(85)  # Slight deviation from center
+        time.sleep(0.05)
+        set_servo_angle(95)
+        time.sleep(0.05)
+
+
+while True:
+    servo_vibrate()
+    
+    if sensor.value() == 1:  # Vibration sensor triggered
+        led.value(1)         # Turn on LED
+    else:
+        led.value(0)         # Turn off LED
+    
+    time.sleep(0.1)
