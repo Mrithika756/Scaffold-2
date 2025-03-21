@@ -2,9 +2,9 @@ from machine import Pin, PWM
 import time
 
 # Define servo parameters
-servo = PWM(Pin(13), freq=50) 
-led = Pin(2, Pin.OUT)         
-sensor = Pin(12, Pin.IN)      
+servo = PWM(Pin(2), freq=50) 
+led = Pin(5, Pin.OUT)         
+sensor = Pin(4, Pin.IN)      
 
 # Function to set servo angle
 def set_servo_angle(angle):
